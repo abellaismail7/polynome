@@ -46,14 +46,14 @@ void print_poly(t_poly *poly, int is_first)
 		printf("X");
 	}
 	print_poly(poly->next, 0);
-
+	fflush(stdout);
 }
 
-int  find_poly(t_node *nodes, int nindex, char c)
+int  find_poly(t_node *nodes, char c)
 {
 	int i = 0;
 	
-	while(i < nindex)
+	while(nodes[i].poly)
 	{
 		if (nodes[i].varname == c)
 		{
@@ -127,3 +127,23 @@ t_poly *clone_poly(t_poly *poly)
 	return npoly;
 }
 
+t_poly *clone_monome(t_poly *poly)
+{
+	if(poly == NULL)
+		return NULL;
+	t_poly *npoly = malloc(sizeof(t_poly));
+	npoly->coef = poly->coef; 
+	npoly->exp = poly->exp; 
+	npoly->next = NULL; 
+
+	return npoly;
+}
+
+t_node *last_node(t_node *nodes)
+{
+	int i = 0;
+	
+	while(nodes[i].poly)
+		i++;
+	return nodes + i;
+}
