@@ -61,9 +61,9 @@ int show_prompt()
 {
 	char cmd[20000];
 
-	handle_cmd("LET P = 10X^2+5X+4\n");
-	handle_cmd("LET X = 3X^4-3X-3\n");
-	handle_cmd("MUL P,X\n");
+	handle_cmd("LET P = 2X^3+5X^2+4\n");
+	handle_cmd("LET X = 3X^2\n");
+	handle_cmd("ADD P,X\n");
 	printf("(polynome) ");
 	while((fgets(cmd, 20000, stdin)))
 	{

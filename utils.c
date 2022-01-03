@@ -2,16 +2,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void print_sign(int is_first, int d)
+{
+	if (is_first)
+		printf("%d", d);
+	else
+		printf("%+d", d);
+}
+
 void print_poly(t_poly *poly, int is_first)
 {
 	if(poly == NULL || poly->coef.dec == 0)
 		return;
 
-	if(poly->coef.frac == 1)
+	if(poly->coef.frac == 1 && poly->exp != 0)
 	{
 		if(poly->coef.dec == 1) 
 		{
-			printf("X");
+			printf("+X");
 			return;
 		}
 		else if (poly->coef.dec == -1)
@@ -21,32 +29,19 @@ void print_poly(t_poly *poly, int is_first)
 		}
 	}
 	if (poly->coef.dec % poly->coef.frac == 0)
-	{
-		if (is_first)
-			printf("%d", poly->coef.dec / poly->coef.frac);
-		else
-			printf("%+d", poly->coef.dec / poly->coef.frac);
-	}
+		print_sign(is_first, poly->coef.dec / poly->coef.frac);
 	else
 	{
-		if (is_first)
-			printf("%d/%d", poly->coef.dec, poly->coef.frac);
-		else
-			printf("%+d/%d", poly->coef.dec, poly->coef.frac);
+		print_sign(is_first, poly->coef.dec);
+		printf("/%d", poly->coef.frac);
 	}
 	
 	int n = poly->exp;
 	if (n != 0 && n != 1)
-	{
 		printf("X^%d", poly->exp);
-	}
 	else if (n == 1)
-	{
-
 		printf("X");
-	}
 	print_poly(poly->next, 0);
-	fflush(stdout);
 }
 
 int  find_poly(t_node *nodes, char c)
@@ -147,3 +142,30 @@ t_node *last_node(t_node *nodes)
 		i++;
 	return nodes + i;
 }
+
+void add_monome(t_poly **head, t_poly *monome)
+{
+	if (*head == NULL)
+		return;
+
+	t_poly *cur = *head;
+	if (cur->exp < monome->exp)
+	{
+		monome->next = cur;
+		*head = monome;
+		return ;
+	}
+
+	t_poly *last = cur;
+	while (cur->exp >= monome->exp)
+	{
+		last = cur;
+		if (cur->next == NULL)
+			break ;
+		cur = cur->next;
+	}
+
+	monome->next = last->next;
+	last->next = monome;
+}
+

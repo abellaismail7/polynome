@@ -34,7 +34,7 @@ void handle_op(t_node *nodes, char *cmd, int is_add)
 	t_poly *p1 = nodes[find_poly(nodes, cmd[0])].poly;
 	t_poly *p2 = nodes[find_poly(nodes, cmd[2])].poly;
 
-	poly_op(p1, p2, is_add);
+	poly_add(p1, p2);
 	puts("");
 }
 
