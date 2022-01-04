@@ -48,12 +48,16 @@ int handle_cmd(char *s)
 		handle_op(nodes, s + 4, 0);
 	else if(strncmp(s, "MUL ", 4) == 0)
 		handle_mul(nodes, s + 4);
+	else if(strncmp(s, "POW ", 4) == 0)
+		handle_pow(nodes, s + 4);
 	else if(strncmp(s, "DER ", 4) == 0)
 		handle_der(nodes, s + 4);
 	else if(strncmp(s, "INT ", 4) == 0)
 		handle_int(nodes, s + 4);
 	else if(strcmp(s, "EXIT\n") == 0)
 		return 1;
+	else
+		printf("Polynome: Command Not Found\n");
 	return 0;
 }
 
