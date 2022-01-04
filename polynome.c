@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_node nodes[30];
+t_node nodes[60];
 
 void display(char *s)
  {
@@ -65,9 +65,9 @@ int show_prompt()
 {
 	char cmd[20000];
 
-	handle_cmd("LET P = 2X^3+5X^2+4\n");
-	handle_cmd("LET X = 3X^2\n");
-	handle_cmd("ADD P,X\n");
+	//handle_cmd("LET P = 2X^3+5X^2+4\n");
+	//handle_cmd("LET X = 3X^2\n");
+	//handle_cmd("ADD P,X\n");
 	printf("(polynome) ");
 	while((fgets(cmd, 20000, stdin)))
 	{

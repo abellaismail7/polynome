@@ -39,3 +39,5 @@ void eval(t_node *nodes, char *s);
 void handle_set(t_node *nodes, char *cmd);
 void handle_let(t_node *nodes, char *s);
 int handle_mul(t_node *nodes, char *s);
+t_poly *handle__mul(t_poly *p1, t_poly *p2);
+int handle_pow(t_node *nodes, char *s);

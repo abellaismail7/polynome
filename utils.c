@@ -44,6 +44,24 @@ void print_poly(t_poly *poly, int is_first)
 	print_poly(poly->next, 0);
 }
 
+
+void printcoef(t_coef coef, int is_first)
+{
+	if(coef.dec % coef.frac == 0)
+	{
+		if (is_first)
+			printf("%d", (int)(coef.dec / coef.frac));
+		else
+			printf("%+d", (int)(coef.dec / coef.frac));
+	}
+	else {
+		if (is_first)
+			printf("%d/%d", coef.dec, coef.frac);
+		else
+			printf("%+d/%d", coef.dec, coef.frac);
+	}
+}
+
 int  find_poly(t_node *nodes, char c)
 {
 	int i = 0;
