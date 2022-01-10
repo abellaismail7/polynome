@@ -33,6 +33,17 @@ void handle_op(t_node *nodes, char *cmd, int is_add)
 {
 	t_poly *p1 = nodes[find_poly(nodes, cmd[0])].poly;
 	t_poly *p2 = nodes[find_poly(nodes, cmd[2])].poly;
+	
+	if (!is_add)
+	{
+		t_poly p_neg;
+
+		p_neg.coef.dec = -1;
+		p_neg.coef.frac = 1;
+		p_neg.exp = 0;
+		p_neg.next = NULL;
+		p2 = handle__mul(p2, &p_neg);
+	}
 
 	poly_add(p1, p2);
 	puts("");
